@@ -36,3 +36,47 @@ QUnit.test("Read two items", function (assert) {
 	assert.equal(cat.read(id1), item1, "Read back item one");
 	assert.equal(cat.read(id2), item2, "Read back item two");
 });
+
+QUnit.module("Delete tests");
+QUnit.test("Delete item", function (assert) {
+	var cat = category();
+	var item1 = {"name": "item one"};
+	var id1 = cat.insert(item1);
+	cat.delete(id1);
+	assert.ok(!cat.read(id1), "Item deleted");
+});
+
+QUnit.test("Delete one item of two", function (assert) { 
+	var cat = category();
+	var item1 = {"name": "item one"};
+	var item2 = {"name": "item two"};
+	var id1 = cat.insert(item1);
+	var id2 = cat.insert(item2);
+	cat.delete(id1);
+	assert.ok(!cat.read(id1), "item one deleted");
+	assert.equal(cat.read(id2), item2, "item two intact");
+});
+
+QUnit.module("List tests");
+QUnit.test("list items", function (assert) {
+	var cat = category();
+	var item1 = {"name": "item one"};
+	var item2 = {"name": "item two"};
+	var id1 = cat.insert(item1);
+	var id2 = cat.insert(item2);
+	assert.deepEqual(cat.list(), [item1, item2], "list both items");
+});
+
+QUnit.test("list items after delete", function (assert) {
+	var cat = category();
+	var item1 = {"name": "item one"};
+	var item2 = {"name": "item two"};
+	var item3 = {"name": "item three"};
+	var id1 = cat.insert(item1);
+	var id2 = cat.insert(item2);
+	var id3 = cat.insert(item3);
+	cat.delete(id2);
+	// This test should change to behave more like JSON API
+	assert.deepEqual(cat.list(), [item1, undefined, item3], "list items one and three");
+	
+});
