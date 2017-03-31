@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RPG Campaign Manager</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<h1>RPG Campaign Manager</h1>
+<div class="main">
+  <div class="categories">
+	<div class="category">
+	  <h3>Characters</h3>
+	  <div>
+	    <ul>
+		  <li><a href="#">Shaggy</a></li>
+		  <li><a href="#">Velma</a></li>
+		  <li><a href="#">Daphne</a></li>
+		  <li><a href="#">Fred</a></li>
+		  <li><a href="#">Scooby</a></li>
+		</ul>
+	  </div>
+	</div>
+	  <div class="category">
+	  <h3>Places</h3>
+	  <div>
+	    <ul>
+		  <li><a href="#">The Haunted Mansion</a></li>
+		  <li><a href="#">The Carnival</a></li>
+		</ul>
+	  </div>
+	</div>
+	  <div class="category">
+	  <h3>Notes</h3>
+	  <div>
+	    <ul>
+		  <li><a href="#">Old Man Winters</a></li>
+		  <li><a href="#">The Funhouse</a></li>
+		</ul>
+	  </div>
+	</div>
+  </div>
+  <div class="views">
+    <div class="view dice">
+      <h3>Dice Roller</h3>
+      <div>
+      </div>
+    </div>
+    <div class="view">
+      <h3>Combat Tracker</h3>
+      <div>
+      </div>
+    </div>
+    <div class="view">
+      <h3>Notes</h3>
+      <div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+	var opts = {
+		collapsible: true,
+		active: false
+	};
+	$(".category").accordion(opts);
+	$(".view").accordion(opts);
+  </script>
+</body>
+</html>
