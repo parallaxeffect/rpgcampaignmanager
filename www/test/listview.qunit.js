@@ -17,7 +17,7 @@ QUnit.test("Generate Scooby view from list", function (assert) {
 	assert.equal(html, expected, "View generated");
 });
 
-QUnit.test("Generate Scooby view", function (assert) {
+QUnit.test("Generate Scooby view from category", function (assert) {
 	var characters = ["Shaggy", "Velma", "Fred", "Daphne", "Scooby"];
 	var cat = category();
 	for (var i in characters) {
@@ -40,7 +40,7 @@ QUnit.test("Generate Scooby view", function (assert) {
 	assert.equal(html, expected, "View generated");
 });
 
-QUnit.test("Generate Rocky view", function (assert) {
+QUnit.test("Generate Rocky view from category", function (assert) {
 	var characters = ["Rocky", "Bullwinkle"];
 	var cat = category();
 	for (var i in characters) {

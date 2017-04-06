@@ -78,5 +78,29 @@ QUnit.test("list items after delete", function (assert) {
 	cat.delete(id2);
 	// This test should change to behave more like JSON API
 	assert.deepEqual(cat.list(), [item1, undefined, item3], "list items one and three");
-	
+});
+
+QUnit.module("Resource id tests");
+QUnit.test("insert resource with id", function (assert) {
+	var cat = category();
+	var item23 = {"name": "item twentythree"};
+	cat.insert(item23, 23);
+	assert.deepEqual(cat.read(23), item23, "read back item 23");
+});
+
+QUnit.test("insert same id twice", function (assert) {
+	var cat = category();
+	var item10 = {"name": "item ten"};
+	cat.insert(item10, 10);
+	var anotheritem = {"name": "another item"};
+	cat.insert(anotheritem, 10);
+	assert.deepEqual(cat.read(10), item10, "read back original item");
+});
+
+QUnit.module("key test");
+QUnit.test("list keys", function (assert) {
+	var cat = category();
+	var item10 = {"name": "item ten"};
+	cat.insert(item10, 10);
+	assert.deepEqual(cat.keys(), ["10"], "listed keys");
 });

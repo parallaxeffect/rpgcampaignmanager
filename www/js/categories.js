@@ -1,7 +1,14 @@
 category = function () {
 	var that = {
 		items: [],
-		insert: function (item) {
+		insert: function (item, id) {
+			if (id !== undefined) {
+				if (id in this.items) {
+					return undefined;
+				}
+				this.items[id] = item;
+				return id;
+			}
 			return this.items.push(item) - 1;
 		},
 		
@@ -15,7 +22,13 @@ category = function () {
 		
 		list: function () {
 			return this.items;
+		},
+		
+		keys: function () {
+			return Object.keys(this.items);
 		}
+		
+		
 	}
 	return that;
 }

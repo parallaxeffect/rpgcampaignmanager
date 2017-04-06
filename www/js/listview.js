@@ -1,16 +1,12 @@
 listview = function() {
 	return {
 		html: function (list) {
-			var that = "<div>"+"<ul>";		 
-			for (var i in list) {
-				that = that + this.listitem(list[i]);
-			}
-			that = that +"</ul>"+"</div>";
-			return that;
-		},
-		
-		listitem: function (item) {
-			return "<li><a href='#'>"+item +"</a></li>";
+			template = "<div><ul>{{#list}}" +
+			"<li><a href='#'>{{.}}</a></li>" +
+			"{{/list}}</ul></div>"
+			data = {"list": list};
+			
+			return (Mustache.render(template, data));
 		}
 	};
 }

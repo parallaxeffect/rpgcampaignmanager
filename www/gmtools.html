@@ -12,30 +12,20 @@
 	
   </div>
   <div class="views">
-    <div class="view dice">
-      <h3>Dice Roller</h3>
-      <div>
-      </div>
-    </div>
-    <div class="view">
-      <h3>Combat Tracker</h3>
-      <div>
-      </div>
-    </div>
-    <div class="view">
-      <h3>Notes</h3>
-      <div>
-      </div>
-    </div>
+    
   </div>
 </div>
 
 
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="/js/include/mustache.min.js"></script>
   
   <script src="/js/categories.js"></script>
   <script src="/js/listview.js"></script>
+  <script src="/js/resource.js"></script>
+  <script src="/js/view/category.js"></script>
+  <script src="/js/view/genericview.js"></script>
   
   <script>
 	var categories = {
@@ -44,19 +34,40 @@
 	"Notes": ["Old Man Winters"]	
 	};
   
-	for (var category in categories) {
-		$("<div />").addClass("category")
-					.append($("<h3>").text(category))
-					.append(listview().html(categories[category]))
-					.appendTo($(".categories"));
-	}
+	var res = resource();
   
+	for (var c in categories) {
+		var catObj = resNewOb("category", {
+			"name": c,
+			"type": c
+		})
+		res.insert(catObj);
+		for (index in categories[c]) {
+			var obj = resNewOb(c, {"name": categories[c][index]});
+			res.insert(obj);
+		}
+	}
+	
+	var views = ["Dice Roller", "Combat Tracker", "Notes"].map( genericView);
+	
+	$(".categories").html(categoryView(res).html());
+	
+	for (i in views) {
+		$(".views").append(views[i].html());
+	}
+	
+	var view = editView(res.read("Characters", "0"));
+	$(".views").append(view.html());
+	
 	var opts = {
 		collapsible: true,
 		active: false
 	};
 	$(".category").accordion(opts);
 	$(".view").accordion(opts);
+	
+	
+	
   </script>
 </body>
 </html>
